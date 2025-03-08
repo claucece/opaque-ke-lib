@@ -1,0 +1,9 @@
+[package]
+name = "opaque-ke-lib"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rand = "0.8"
+opaque-ke = "3.0"
+sha2 = "0.10"
