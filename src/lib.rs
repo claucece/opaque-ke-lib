@@ -1,4 +1,5 @@
 mod opaque_auth {
+    use argon2::Argon2;
     use rand::CryptoRng;
     use rand::RngCore;
 
@@ -9,6 +10,7 @@ mod opaque_auth {
         ClientRegistration, ClientRegistrationFinishParameters, ClientRegistrationFinishResult,
         ClientRegistrationStartResult, CredentialResponse, RegistrationResponse,
     };
+
     pub struct DefaultCipherSuite;
 
     // The default suite to use
@@ -16,7 +18,7 @@ mod opaque_auth {
         type OprfCs = opaque_ke::Ristretto255;
         type KeGroup = opaque_ke::Ristretto255;
         type KeyExchange = opaque_ke::key_exchange::tripledh::TripleDh;
-        type Ksf = opaque_ke::ksf::Identity;
+        type Ksf = Argon2<'static>;
     }
 
     pub fn client_registration_start<R: CryptoRng + RngCore>(
